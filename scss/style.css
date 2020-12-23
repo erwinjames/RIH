@@ -1,0 +1,77 @@
+.reveal-if-active {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 16px;
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.reveal-if-active label {
+  display: block;
+  margin: 0 0 3px 0;
+}
+
+.reveal-if-active input[type=text] {
+  width: 100%;
+}
+
+input[type="radio"]:checked ~ .reveal-if-active,
+input[type="checkbox"]:checked ~ .reveal-if-active {
+  opacity: 1;
+  max-height: 100px;
+  padding: 10px 20px;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  overflow: visible;
+}
+
+.payments {
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.payments > div {
+  margin: 0 0 20px 0;
+}
+
+.payments > div p {
+  font-size: 15px;
+  padding: 10px;
+  text-align: center;
+}
+
+.payments > div > div {
+  padding: 10px;
+}
+
+.payments > h4 {
+  color: green;
+  font-size: 24px;
+  margin: 0 0 10px 0;
+  border-bottom: 2px solid green;
+}
+.weather-icon {
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+.weather-forecast {
+    color: #212121;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 20px 0px;
+}
+
+span.min-temperature {
+    margin-left: 15px;
+    color: #929292;
+}
+
+.time {
+    line-height: 25px;
+}
+
+/*# sourceMappingURL=style.css.map */
