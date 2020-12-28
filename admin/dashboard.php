@@ -150,7 +150,34 @@ $cnt5=$query5->rowCount();
 						</div>
 					</div>
 
+	<div class="four-grids">
+					<div class="col-md-3 four-grid">
+						<div class="four-agileinfo">
+							<div class="icon">
+								<i class="glyphicon glyphicon-list-alt" aria-hidden="true"></i>
+							</div>
+							<div class="four-text">
+								<h3>Ratings</h3>
+<?php $sql6 = "SELECT Sum(rating) from ratings";
+$query6= $dbh -> prepare($sql6);
+$query6->execute();
+ while ($results6 = $query6->fetch(PDO::FETCH_ASSOC))
+    {
+    	$total = $results6['Sum(rating)'];
+    	$percent = ($total*3)/100;
+        echo "<h4>".$percent."%</h4";
+    }
+					?>
+								
+								
+							</div>
+							
+						</div>
+					</div>
 
+
+					<div class="clearfix"></div>
+				</div>
 					<div class="clearfix"></div>
 				</div>
 <!--//four-grids here-->

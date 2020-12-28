@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 04:11 AM
+-- Generation Time: Dec 28, 2020 at 06:09 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -41,6 +41,29 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `UserName`, `Password`, `updationDate`, `admin_type`) VALUES
 (1, 'admin', 'f925916e2754e5e03f75dd58a5733251', '2017-05-13 11:18:49', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `rating_id` int(11) NOT NULL,
+  `booking_id` int(200) DEFAULT NULL,
+  `rating` int(5) DEFAULT NULL,
+  `ratingsFrom` varchar(200) DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ratings`
+--
+
+INSERT INTO `ratings` (`rating_id`, `booking_id`, `rating`, `ratingsFrom`, `comment`, `date`) VALUES
+(2, 33, 4, 'ejmanugas@dev.com', 'another sample', '2020-12-27 20:18:35'),
+(3, 33, 5, 'ejmanugas@dev.com', 'another', '2020-12-27 20:27:56');
 
 -- --------------------------------------------------------
 
@@ -285,6 +308,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`rating_id`);
+
+--
 -- Indexes for table `tblbooking`
 --
 ALTER TABLE `tblbooking`
@@ -349,6 +378,12 @@ ALTER TABLE `tblusers`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `rating_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblbooking`
