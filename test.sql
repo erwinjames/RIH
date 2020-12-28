@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2020 at 03:25 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Dec 28, 2020 at 04:11 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,8 +68,8 @@ CREATE TABLE `tblbooking` (
 --
 
 INSERT INTO `tblbooking` (`BookingId`, `PackageId`, `UserEmail`, `FromDate`, `pkgOffer_value`, `pax`, `RegDate`, `status`, `CancelledBy`, `UpdationDate`, `payment`, `payment_status`) VALUES
-(27, 14, 'ejmanugas@dev.com', '2020-12-18', '1200', 4800, '2020-12-19 07:59:32', 2, 'a', '2020-12-19 18:09:15', 'gcash', 'check'),
-(28, 14, 'ejmanugas@dev.com', '2020-12-17', '1200', 3200, '2020-12-19 08:40:04', 2, 'u', '2020-12-19 16:01:04', 'paymaya', NULL);
+(33, 17, 'ejmanugas@dev.com', '2020-12-30', '', 6500, '2020-12-27 19:04:57', 0, NULL, '2020-12-27 20:41:26', 'gcash', 'check'),
+(34, 18, 'ejmanugas@dev.com', '2020-12-28', '', 6500, '2020-12-27 21:52:33', 0, NULL, '2020-12-27 21:58:13', 'gcash', 'check');
 
 -- --------------------------------------------------------
 
@@ -161,6 +161,29 @@ INSERT INTO `tblpages` (`id`, `type`, `detail`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblpayments`
+--
+
+CREATE TABLE `tblpayments` (
+  `payId` int(11) NOT NULL,
+  `bookingId` int(200) DEFAULT NULL,
+  `receivedBy` varchar(200) DEFAULT NULL,
+  `DownPay_amount` int(200) DEFAULT NULL,
+  `statusRecived` int(200) DEFAULT NULL,
+  `Full_Amount` int(200) DEFAULT NULL,
+  `date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblpayments`
+--
+
+INSERT INTO `tblpayments` (`payId`, `bookingId`, `receivedBy`, `DownPay_amount`, `statusRecived`, `Full_Amount`, `date`) VALUES
+(5, 33, 'ejmanugas@dev.com', 1000, 5500, 6500, '2020-12-27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblqrmessage`
 --
 
@@ -181,7 +204,12 @@ INSERT INTO `tblqrmessage` (`id`, `bookings_id`, `owner_email`, `users_email`, `
 (1, NULL, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', 'DONG.png', '2020-12-19 00:47:16'),
 (2, NULL, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '56219956_2147429515346310_5177691712230785024_o.jpg', '2020-12-19 00:50:01'),
 (3, 23, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', 'DONG.png', '2020-12-19 03:26:00'),
-(4, 27, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '56219956_2147429515346310_5177691712230785024_o.jpg', '2020-12-19 08:00:18');
+(4, 27, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '56219956_2147429515346310_5177691712230785024_o.jpg', '2020-12-19 08:00:18'),
+(5, 31, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '0000000001=.jpg', '2020-12-27 18:11:43'),
+(6, 31, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '01.jpg', '2020-12-27 19:02:31'),
+(7, 33, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '0001.png', '2020-12-27 19:05:36'),
+(8, 31, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', 'background3.jpg', '2020-12-27 19:06:01'),
+(9, 34, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '000001.jpg', '2020-12-27 21:57:17');
 
 -- --------------------------------------------------------
 
@@ -200,22 +228,25 @@ CREATE TABLE `tbltourpackages` (
   `boat_capacity` int(100) DEFAULT NULL,
   `pricePerpack` int(200) DEFAULT NULL,
   `PackageLocation` varchar(100) DEFAULT NULL,
-  `PackagePrice` int(11) DEFAULT NULL,
   `PackageFetures` varchar(255) DEFAULT NULL,
   `offer_price` int(255) NOT NULL,
   `PackageDetails` mediumtext DEFAULT NULL,
   `PackageImage` varchar(100) DEFAULT NULL,
   `Creationdate` timestamp NULL DEFAULT current_timestamp(),
-  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+  `UpdationDate` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `status` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbltourpackages`
 --
 
-INSERT INTO `tbltourpackages` (`PackageId`, `owner_identity`, `PackageName`, `address`, `contact_num`, `boat_name`, `boat_operator`, `boat_capacity`, `pricePerpack`, `PackageLocation`, `PackagePrice`, `PackageFetures`, `offer_price`, `PackageDetails`, `PackageImage`, `Creationdate`, `UpdationDate`) VALUES
-(14, 'manugasewinjames@dev.com', 'Olango Princess Hopping2', 'babag 2 lapu lapu city cebu', 65464646, 'princess star2', 'erwin2', 14, 800, 'Olango-lapu2', 2000, 'With foods', 1200, 'This is a test for the identity', '1102017.png', '2020-12-17 08:18:25', '2020-12-17 09:04:42'),
-(15, 'manugasewin@dev.com', 'Olango Princess Hopping', 'babag 2 lapu lapu city cebu', 65464646, 'princess star2', 'erwin', 11, 100, 'Olango-lapu2', 20000, 'porkchup, lechon', 1000, 'fadsfadf', '4x3.jpg', '2020-12-18 17:42:43', '2020-12-18 18:04:58');
+INSERT INTO `tbltourpackages` (`PackageId`, `owner_identity`, `PackageName`, `address`, `contact_num`, `boat_name`, `boat_operator`, `boat_capacity`, `pricePerpack`, `PackageLocation`, `PackageFetures`, `offer_price`, `PackageDetails`, `PackageImage`, `Creationdate`, `UpdationDate`, `status`) VALUES
+(14, 'manugasewinjames@dev.com', 'Olango Princess Hopping2', 'babag 2 lapu lapu city cebu', 65464646, 'princess star2', 'erwin2', 14, 800, 'Olango', 'With foods', 1200, 'This is a test for the identity', '1102017.png', '2020-12-17 08:18:25', '2020-12-27 18:01:15', 1),
+(15, 'manugasewin@dev.com', 'Olango Princess Hopping', 'babag 2 lapu lapu city cebu', 65464646, 'princess star2', 'erwin', 11, 100, 'Olango-lapu2', 'porkchup, lechon', 1000, 'fadsfadf', '4x3.jpg', '2020-12-18 17:42:43', '2020-12-27 19:04:20', 1),
+(16, 'admin', 'sample', 'babag', 14654654, 'star', 'me', 15, 450, 'olango', 'baboy', 5000, 'something details', '00000000001.png', '2020-12-27 17:19:35', '2020-12-27 17:48:51', 1),
+(17, 'admin', 'sample', 'babag', 14654654, 'star', 'me', 15, 550, 'olango', 'baboy manok', 5000, 'fadfadfsa', '01.jpg', '2020-12-27 19:04:10', '2020-12-27 19:04:19', 1),
+(18, 'manugasewinjames@dev.com', 'this is a sample', 'babag', 14654654, 'star', 'me', 15, 550, 'olango', 'baboy', 5000, 'sample', '000000000000001.jpg', '2020-12-27 21:51:25', '2020-12-27 21:55:42', 1);
 
 -- --------------------------------------------------------
 
@@ -284,6 +315,12 @@ ALTER TABLE `tblpages`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblpayments`
+--
+ALTER TABLE `tblpayments`
+  ADD PRIMARY KEY (`payId`);
+
+--
 -- Indexes for table `tblqrmessage`
 --
 ALTER TABLE `tblqrmessage`
@@ -317,7 +354,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `tblbooking`
 --
 ALTER TABLE `tblbooking`
-  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tblenquiry`
@@ -344,16 +381,22 @@ ALTER TABLE `tblpages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT for table `tblpayments`
+--
+ALTER TABLE `tblpayments`
+  MODIFY `payId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `tblqrmessage`
 --
 ALTER TABLE `tblqrmessage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbltourpackages`
 --
 ALTER TABLE `tbltourpackages`
-  MODIFY `PackageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `PackageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tblusers`
