@@ -30,6 +30,8 @@ else{
 <!-- lined-icons -->
 <link rel="stylesheet" href="css/icon-font.min.css" type='text/css' />
 <!-- //lined-icons -->
+<link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css">
+<script type="text/javascript" src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 </head> 
 <body>
    <div class="page-container">
@@ -99,10 +101,13 @@ $cnt1=$query1->rowCount();
                         </div>
                     </div>
                 </div>
-				<div class="panel-body">
+				<div class="panel-body" id="printJS-form">
                     <div id="chart_area" style="width: 1000px; height: 620px;"></div>
                 </div>
 </div>
+<button type="button" onclick="printJS('printJS-form', 'html')">
+    Print Graph Report
+ </button>
 </div>
 					
 <!--inner block end here-->

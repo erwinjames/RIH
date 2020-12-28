@@ -19,5 +19,4 @@ foreach($resultsG as $resultG)
 }
 echo json_encode($output);
 }
-
 ?>
