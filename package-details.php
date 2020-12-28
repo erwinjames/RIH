@@ -2,9 +2,15 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+
 if(isset($_POST['submit2']))
 {
-	$paymentMethod=$_POST['payment__option'];
+$paymentMethod=$_POST['payment__option'];
+if ($paymentMethod=='paymaya') {
+		echo "<script>alert('Please use other payment method')</script>";
+	}
+	else
+	{
 $pid=intval($_GET['pkgid']);
 $useremail=$_SESSION['login'];
 $fromdate=$_POST['fromdate'];
@@ -25,20 +31,34 @@ $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-	if ($paymentMethod=='paymaya') {
-		header('Location: https://pg-sandbox.paymaya.com/checkout/v1/checkouts');
-		exit;
-	}else 
 	if($paymentMethod=='gcash'){
 		$msg="Booked Successfully";
 	}
-
 }
 else 
 {
 $error="Something went wrong. Please try again";
 }
+}
+}
 
+if (isset($_POST['searchCity'])) {
+    $apiKey = "d79c326a0a8845b075b3cc820a146634";
+    $cityName = $_POST['city'];
+    $googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" . $cityName . "&lang=en&units=metric&APPID=" . $apiKey;
+    
+    $ch = curl_init();
+    
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $data = json_decode($response);
+    $currentTime = time();
 }
 ?>
 <!DOCTYPE HTML>
@@ -69,9 +89,19 @@ $error="Something went wrong. Please try again";
 <script src="js/jquery-ui.js"></script>
 					<script>
 						$(function() {
-						$( "#datepicker" ).datepicker();
+					$('#datepicker').datepicker().change(evt => {
+  var selectedDate = $('#datepicker').datepicker('getDate');
+  var now = new Date();
+  now.setHours(0,0,0,0);
+  if (selectedDate < now) {
+    alert("You cant reserve boat on that date!")
+  } else {
+    console.log("proceed");
+  }
+       });
 						});
 					</script>
+				
 	  <style>
 		.errorWrap {
     padding: 10px;
@@ -100,8 +130,21 @@ $error="Something went wrong. Please try again";
 </div>
 <div class="selectroom">
 	<div class="container">	
+<form style="float: right" class="col-md-12 navbar-form" role="search" method="post">
+    <div class="input-group add-on">
+      <input name="city" class="form-control" placeholder="Search City for Weather" name="srch-term" id="srch-term" type="text">
+      <div class="input-group-btn">
+        <input name="searchCity" class="btn btn-default" type="submit" placeholder="Search"><i class="glyphicon glyphicon-search" placeholder="Search City"></i>
+      </div>
+    </div>
+  </form>
+  </div>
+	<div class="container">	
+
+
 		  <?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
+
 <?php 
 $pid=intval($_GET['pkgid']);
 $sql = "SELECT * from tbltourpackages where PackageId=:pid";
@@ -117,10 +160,54 @@ foreach($results as $result)
 
 <form name="book" method="post">
 		<div class="selectroom_top">
+			<div class="col-md-6">
 			<div class="col-md-4 selectroom_left wow fadeInLeft animated" data-wow-delay=".5s">
 				<img src="owners/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
 			</div>
-			<div class="col-md-8 selectroom_right wow fadeInRight animated" data-wow-delay=".5s">
+			</div>
+			<div class="col-md-6">
+				<?php
+
+				if (!isset($_POST['searchCity'])) {
+		$apiKey = "d79c326a0a8845b075b3cc820a146634";
+    $cityName = $result->PackageLocation;
+    $googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" . $cityName . "&lang=en&units=metric&APPID=" . $apiKey;
+    
+    $ch = curl_init();
+    
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_URL, $googleApiUrl);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    $data = json_decode($response);
+    $currentTime = time();
+	
+}
+	 
+
+				?>
+				<h2><?php echo $data->name; ?> Weather Status</h2>
+        <div class="time">
+            <div><?php echo date("l", $currentTime); ?></div>
+            <div><?php echo date("jS F, Y",$currentTime); ?></div>
+            <div><?php echo ucwords($data->weather[0]->description); ?></div>
+        </div>
+        <div class="weather-forecast">
+            <img
+                src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png"
+                class="weather-icon" /> <?php echo $data->main->temp_max; ?>&deg;C<span
+                class="min-temperature"><?php echo $data->main->temp_min; ?>&deg;C</span>
+        </div>
+        <div class="time">
+            <div>Humidity: <?php echo $data->main->humidity; ?> %</div>
+            <div>Wind: <?php echo $data->wind->speed; ?> km/h</div>
+        </div>
+			</div>
+			<div class="col-md-12 selectroom_right wow fadeInRight animated" data-wow-delay=".5s">
 				<h2><?php echo htmlentities($result->PackageName);?></h2>
 				<p class="dow">#RIHBoat-<?php echo htmlentities($result->PackageId);?></p>
 				<p><b>Boat Name:</b> <?php echo htmlentities($result->boat_name);?></p>
@@ -138,7 +225,7 @@ foreach($results as $result)
 					<label class="inputLabel">Package Offer</label>
 											<div>
 												<select onchange="showDiv('hidden_div', this)" id="test" name="menu1">
-														<option value="0" selected="selected" class="form-control">***No Package***</option>
+														<option value="" selected="selected" class="form-control">***No Package***</option>
 														<option  value="<?php echo htmlentities($result->offer_price);?>"><?php echo htmlentities($result->PackageFetures);?></option>
 												</select>
 											</div>
@@ -194,8 +281,10 @@ foreach($results as $result)
 							</div>
 		
 			</div>
-		<h3>Details</h3>
-				<p style="padding-top: 1%;padding-bottom:30px;"><?php echo htmlentities($result->PackageDetails);?> </p>	
+			<br>
+			<div class="clearfix"></div>
+		<h3 style="padding-top: 4%; ">Details</h3>
+				<p style="padding-top: 3%;padding-bottom:30px;"><?php echo htmlentities($result->PackageDetails);?> </p>	
 				<div class="clearfix"></div>
 				
 				<?php if($_SESSION['login'])

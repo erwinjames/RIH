@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['alogin1'])==0)
 	{	
 header('location:index.php');
 }
@@ -90,6 +90,7 @@ else{
 							<th>Location</th>
 							<th>Price</th>
 							<th>Creation Date</th>
+							<th>Status</th>
 							<th>Action</th>
 						  </tr>
 						</thead>
@@ -112,6 +113,16 @@ foreach($results as $result)
 							<td><?php echo htmlentities($result->PackageLocation);?></td>
 							<td>PHP<?php echo htmlentities($result->PackagePrice);?></td>
 							<td><?php echo htmlentities($result->Creationdate);?></td>
+							<td><?php
+
+							if($result->status==1){
+									echo "confirmed by the admin";
+							}
+							else
+								if ($result->status==0) {
+									echo "Please wait for the admin to confirm";
+								}
+							 ?></td>
 							<td><a href="update-package.php?pid=<?php echo htmlentities($result->PackageId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a></td>
 						  </tr>
 						 <?php $cnt=$cnt+1;} }?>

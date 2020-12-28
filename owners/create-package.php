@@ -4,7 +4,7 @@ error_reporting(0);
 include('includes/config.php');
 
 
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['alogin1'])==0)
 	{	
 header('location:index.php');
 }
@@ -12,7 +12,8 @@ else{
 if(isset($_POST['submit']))
 {
 	
-$owners_identity=htmlentities($_SESSION['alogin']);
+$owners_identity=htmlentities($_SESSION['alogin1']);
+$stats = 0;
 $pname=$_POST['packagename'];
 $address=$_POST['address'];	
 $contact=$_POST['contact'];
@@ -21,13 +22,12 @@ $boatOperator=$_POST['boatOperator'];
 $boatCapacity=$_POST['boatCapacity'];
 $pricePerPack = $_POST['pricePerPack'];
 $plocation=$_POST['packagelocation'];
-$pprice=$_POST['packageprice'];	
 $pfeatures=$_POST['packagefeatures'];
 $offerPrice=$_POST['offerPrice'];
 $pdetails=$_POST['packagedetails'];	
 $pimage=$_FILES["packageimage"]["name"];
 move_uploaded_file($_FILES["packageimage"]["tmp_name"],"pacakgeimages/".$_FILES["packageimage"]["name"]);
-$sql="INSERT INTO TblTourPackages(owner_identity,PackageName,address,contact_num,boat_name,boat_operator,boat_capacity,pricePerpack,PackageLocation,PackagePrice,PackageFetures,offer_price,PackageDetails,PackageImage) VALUES(:owners_identity,:pname,:addres,:contact,:boatName,:boatOperator,:boatCapacity,:pricePerpack ,:plocation,:pprice,:pfeatures,:OfferPrice,:pdetails,:pimage)";
+$sql="INSERT INTO TblTourPackages(owner_identity,PackageName,address,contact_num,boat_name,boat_operator,boat_capacity,pricePerpack,PackageLocation,PackageFetures,offer_price,PackageDetails,PackageImage,status) VALUES(:owners_identity,:pname,:addres,:contact,:boatName,:boatOperator,:boatCapacity,:pricePerpack ,:plocation,:pfeatures,:OfferPrice,:pdetails,:pimage,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':owners_identity',$owners_identity,PDO::PARAM_STR);
 $query->bindParam(':pname',$pname,PDO::PARAM_STR);
@@ -38,10 +38,10 @@ $query->bindParam(':boatOperator',$boatOperator,PDO::PARAM_STR);
 $query->bindParam(':boatCapacity',$boatCapacity,PDO::PARAM_STR);
 $query->bindParam(':pricePerpack',$pricePerPack,PDO::PARAM_STR);
 $query->bindParam(':plocation',$plocation,PDO::PARAM_STR);
-$query->bindParam(':pprice',$pprice,PDO::PARAM_STR);
 $query->bindParam(':pfeatures',$pfeatures,PDO::PARAM_STR);
 $query->bindParam(':OfferPrice',$offerPrice,PDO::PARAM_STR);
 $query->bindParam(':pdetails',$pdetails,PDO::PARAM_STR);
+$query->bindParam(':status',$stats,PDO::PARAM_STR);
 $query->bindParam(':pimage',$pimage,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
@@ -143,22 +143,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<label for="focusedinput" class="control-label">Boat Capacity</label>
 										<!-- <input type="text" class="form-control1" name="" id="boatCapacity" placeholder="Boat Capacity" required> -->
 										<select class="form-control1" onchange='selectOnChange(this)' name="boatCapacity" id="boatCapacity">
-										  				<option selected="selected" value ='' class="form-control">Selct Capacity</option>
-														<option value ='1' class="form-control">1</option>
-														<option value ='2' class="form-control">2</option>
-														<option value ='3' class="form-control">3</option>
-														<option value ='4' class="form-control">4</option>
-														<option value ='5' class="form-control">5</option>
-														<option value ='6' class="form-control">6</option>
-														<option value ='7' class="form-control">7</option>
-														<option value ='8' class="form-control">8</option>
-														<option value ='9' class="form-control">9</option>
-														<option value ='10' class="form-control">10</option>
-														<option value ='11' class="form-control">11</option>
-														<option value ='12' class="form-control">12</option>
-														<option value ='13' class="form-control">13</option>
-														<option value ='14' class="form-control">14</option>
+										  				<option selected="selected" value ='15' class="form-control">Selct Capacity</option>
 														<option value ='15' class="form-control">15</option>
+														<option value ='20' class="form-control">20</option>
+														<option value ='25' class="form-control">25</option>
+														<option value ='30' class="form-control">30</option>
 												</select>
 									</div>
 									<div class="col-sm-6">
@@ -172,11 +161,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<div class="col-sm-12">
 									<label for="focusedinput" class="control-label">Boat Description</label>
 										<textarea class="form-control" rows="5" cols="50" name="packagedetails" id="packagedetails" placeholder="Package Details" required></textarea> 
-									</div>
-									
-									<div class="col-sm-12">
-									<label for="focusedinput" class="control-label">Package Price in PHP</label>
-										<input type="text" class="form-control1" name="packageprice" id="packageprice" placeholder=" Package Price is USD" required>
 									</div>
 									<div class="col-sm-6">
 									<label for="focusedinput" class=" control-label">Package Offer</label>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['alogin1'])==0)
 	{	
 header('location:index.php');
 }
@@ -82,18 +82,16 @@ $cnt1=$query1->rowCount();
                             <select name="year" class="form-control" id="year">
                                 <option value="">Select Year</option>
                             <?php
-							 $sqlG = "SELECT FromDAte from tblbooking where status=2";
+							 $sqlG = "SELECT date from tblpayments";
 							 $queryG = $dbh -> prepare($sqlG);
 							 $queryG->execute();
 							 $resultsG=$queryG->fetchAll(PDO::FETCH_OBJ);
 							 foreach($resultsG as $resultG)
 							 {  
-                                $year = date('Y',strtotime($resultG->FromDAte));
-                                $dateL = date('d',strtotime($resultG->FromDAte));
+                                $year = date('Y',strtotime($resultG->date));
+                                $dateL = date('d',strtotime($resultG->date));
                        
-                                echo '<option value="'.$resultG->FromDAte.'">'.$resultG->FromDAte.'</option>';
-                        
-                              
+                                echo '<option value="'.$resultG->date.'">'.$resultG->date.'</option>';
                                
 							}
                             ?>

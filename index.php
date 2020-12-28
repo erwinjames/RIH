@@ -35,7 +35,7 @@ include('includes/config.php');
 <div class="container">
 	<div class="holiday">	
 	<h3>Boat Reservation</h3>
-<?php $sql = "SELECT * from tbltourpackages order by rand() limit 4";
+<?php $sql = "SELECT * from tbltourpackages where status=1 order by rand() limit 4";
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -65,7 +65,7 @@ foreach($results as $result)
 </div>
 <div class="holiday">	
 	<h3>Latest Boats Added</h3>
-<?php $sql = "SELECT * from tbltourpackages order by Creationdate limit 4";
+<?php $sql = "SELECT * from tbltourpackages where status=1 order by Creationdate";
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

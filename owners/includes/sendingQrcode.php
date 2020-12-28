@@ -4,7 +4,7 @@ error_reporting(0);
 include('config.php');
 if(isset($_POST['submit']))
 {
-$owners_identity=htmlentities($_SESSION['alogin']);
+$owners_identity=htmlentities($_SESSION['alogin1']);
 $user_email=$_POST['email'];	
 $qrcode=$_FILES["qrCode"]["name"];
 move_uploaded_file($_FILES["qrCode"]["tmp_name"],"pacakgeimages/".$_FILES["packageimage"]["name"]);

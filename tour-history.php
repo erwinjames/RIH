@@ -132,7 +132,7 @@ $error="You can't cancel before 24 hours";
 <th>Total price of  Pax</th>
 <th>Status</th>
 <th>Date</th>
-<th>Total Pay by percentage (50%)</th>
+<th>Total Pay</th>
 <th>Total of *</th>
 <th>Action</th>
 </tr>
@@ -199,16 +199,29 @@ echo "Canceled by admin at " .$result->upddate;
 <td><?php echo htmlentities($result->regdate);?></td>
 <td>
 	<?php
-		$totals =  $result->packageOffer +  $result->paxPerValue;
+if ($result->packageOffer==null){
+	$percentages=1000;
+}
+if($result->packageOffer==!null){
+	$totals =  $result->packageOffer +  $result->paxPerValue;
 		$percentage = ($totals*50)/100;
-		echo $percentage;
+		$percentages=$percentage;
+}
+echo $percentages
+?>
 
-	?>
 </td>
 <td>
 <?php 
+if ($result->packageOffer==null){
+	
+	$addTotals =  $result->paxPerValue;
+echo $addTotals;
+}
+if($result->packageOffer==!null){
 $addTotals =  $result->packageOffer +   $result->paxPerValue;
 echo $addTotals;
+}
 ?>
 </td>
 <?php if($result->status==2)
@@ -216,8 +229,15 @@ echo $addTotals;
 	?>
 <td>Cancelled</td>
 <?php } else {?>
-<td><a href="tour-history.php?bkid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you really want to cancel booking')" >Cancel</a> <b>/</b> <a href="scanQrCode.php?totals=<?php echo $addTotals;?>&&percent=<?php echo $percentage;?>&&emails=<?php echo $uemail;?>&&bId=<?php echo htmlentities($result->bookid);?>">continue to payment</td>
-<?php }?>
+<td><a href="tour-history.php?bkid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you really want to cancel booking')" >Cancel</a> <b>/</b>
+	<?php 
+     if ($result->packageOffer==null) {
+	?>
+ <a href="scanQrCode.php?totals=<?php echo $addTotals;?>&&percent=<?php echo $percentages;?>&&emails=<?php echo $uemail;?>&&bId=<?php echo htmlentities($result->bookid);?>">continue to payment </a></td>
+     <?php }
+     if ($result->packageOffer==!null) { ?>
+<a href="scanQrCode.php?totals=<?php echo $addTotals;?>&&percent=<?php echo $percentages;?>&&emails=<?php echo $uemail;?>&&bId=<?php echo htmlentities($result->bookid);?>">continue to payment </a></td>
+<?php  }}?>
 </tr>
 <?php $cnt=$cnt+1; }} ?>
 	</table>

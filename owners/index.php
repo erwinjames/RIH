@@ -17,7 +17,7 @@ include('includes/config.php');
 						  $results=$query->fetchAll(PDO::FETCH_OBJ);
 							
 							 $_SESSION['id'] = $results[0];
-							 $_SESSION['alogin']=$_POST['email_add'];
+							 $_SESSION['alogin1']=$_POST['email_add'];
 						
 							echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
 					}

@@ -7,11 +7,22 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{ 
+	if (isset($_GET['Conid'])) {
+
+	$ConfrimID=$_GET['Conid'];
+	$status = 1;
+$sql="update TblTourPackages set status=:stats where PackageId=:cid";
+$query = $dbh->prepare($sql);
+$query->bindParam(':cid',$ConfrimID,PDO::PARAM_STR);
+$query->bindParam(':stats',$status,PDO::PARAM_STR);
+$query->execute();
+$msg="Package Updated Successfully";
+	}
 	?>
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>RAMIREZ ISLAND HOPPING</title>
+<title>Ramirez Island Hopping</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -87,7 +98,6 @@ else{
 						  <tr>
 						  <th>#</th>
 							<th >Name</th>
-							<th>Type</th>
 							<th>Location</th>
 							<th>Price</th>
 							<th>Creation Date</th>
@@ -95,9 +105,12 @@ else{
 						  </tr>
 						</thead>
 						<tbody>
-<?php $sql = "SELECT * from TblTourPackages";
+<?php 
+$stats = 0;
+$identity = htmlentities($_SESSION['alogin']);
+$sql = "SELECT * from TblTourPackages where status=:stats";
 $query = $dbh -> prepare($sql);
-//$query -> bindParam(':city', $city, PDO::PARAM_STR);
+$query -> bindParam(':stats', $stats, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
@@ -108,11 +121,10 @@ foreach($results as $result)
 						  <tr>
 							<td><?php echo htmlentities($cnt);?></td>
 							<td><?php echo htmlentities($result->PackageName);?></td>
-							<td><?php echo htmlentities($result->PackageType);?></td>
 							<td><?php echo htmlentities($result->PackageLocation);?></td>
-							<td>$<?php echo htmlentities($result->PackagePrice);?></td>
+							<td>PHP<?php echo htmlentities($result->PackagePrice);?></td>
 							<td><?php echo htmlentities($result->Creationdate);?></td>
-							<td><a href="update-package.php?pid=<?php echo htmlentities($result->PackageId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a></td>
+							<td><a href="update-package.php?pid=<?php echo htmlentities($result->PackageId);?>"><button type="button" class="btn btn-primary btn-block">View Details</button></a><br><a href="manage-packages.php?Conid=<?php echo htmlentities($result->PackageId);?>"><button type="button" class="btn btn-primary btn-block">Confirm</button></a></td>
 						  </tr>
 						 <?php $cnt=$cnt+1;} }?>
 						</tbody>

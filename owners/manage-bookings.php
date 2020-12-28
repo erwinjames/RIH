@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if(strlen($_SESSION['alogin'])==0)
+if(strlen($_SESSION['alogin1'])==0)
 	{	
 header('location:index.php');
 }
@@ -148,7 +148,7 @@ if (mail($to_email, $subject, $body, $headers)) {
 						</thead>
 						<tbody>
 <?php 
-$ownerEmail=htmlentities($_SESSION['alogin']);
+$ownerEmail=htmlentities($_SESSION['alogin1']);
 $sql = "SELECT tblbooking.BookingId as bookid,tblusers.Fname as fname,
 tblusers.MobileNumber as mnumber,tblusers.EmailId as email,
 tbltourpackages.PackageName as pckname,tblbooking.PackageId as pid,
@@ -195,7 +195,7 @@ echo "Canceled by User at " .$result->upddate;
 if ($payMethod=="gcash") {
 	$pStatus = htmlentities($result->PayStatus);
 	if($pStatus=="check"){
-		echo "please Check your gcash account before confirming";
+		echo "please Check your gcash account before confirming or <a href='payment_details.php?bookIds=$result->bookid'>Payment Details</a>";
 	}else if($pStatus==null){
 	echo "<a href='sendQrCode.php?email=$result->email&&id=$result->bookid'>Send Gcash Qr Code</a>";
     }
