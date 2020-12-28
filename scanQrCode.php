@@ -50,6 +50,28 @@ if(isset($_REQUEST['updateVal'])){
     $query -> execute();
     header("location:tour-history.php");
 }
+
+if (isset($_POST['submitRating'])) {
+    $email2 = $_GET['emails'];
+    $bid2 = $_GET['bId'];
+    $comment = $_POST['comment'];
+    $rating = $_POST['estrellas'];
+    $sql="INSERT INTO ratings(booking_id,rating,ratingsFrom,comment,date) VALUES(:bid2,:rating,:email2,:comment,now())";
+$query = $dbh->prepare($sql);
+$query->bindParam(':email2',$email2,PDO::PARAM_STR);
+$query->bindParam(':comment',$comment,PDO::PARAM_STR);
+$query->bindParam(':bid2',$bid2,PDO::PARAM_STR);
+$query->bindParam(':rating',$rating,PDO::PARAM_STR);
+$query->execute();
+if($query)
+{
+header("location:tour-history.php");
+}
+else 
+{
+$error="Something went wrong. Please try again";
+}
+}
 // if(isset($_GET['bId'])){
 //     $userEmail= htmlentities($_SESSION['login']);
 //     $userId=intval($_GET['bId']);
@@ -103,6 +125,48 @@ if(isset($_REQUEST['updateVal'])){
     -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
 }
+form .ratings{
+  width: 250px;
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+}
+
+form p,
+form input[type="submit"] {
+  text-align: center;
+  font-size: 20px;
+}
+
+#wrapper form input[type="submit"] {
+  border: 1px solid #d9d9d9;
+  background-color: #efefef;
+}
+
+input[type="radio"] {
+  display: none;
+
+}
+
+label {
+  color: grey;
+   width: 30px;
+   font-size:30px;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ label {
+  color: orange;
+}
 		</style>
 </head>
 <body>
@@ -144,9 +208,27 @@ known that , in manual way , data are being stored by recording it on paper . Th
         </p>
         <hr>
 <?php
-if ($result->status==true) {
-    echo "<h1>FULL PAID</h1>";
-}else
+if ($result->status==true) {?>
+    <h1>FULL PAID</h1>
+    <div id="wrapper">
+    <p class="clasificacion">
+       <input id="radio1" type="radio" name="estrellas" value="5">
+       <label for="radio1">&#9733;</label>
+       <input id="radio2" type="radio" name="estrellas" value="4">
+       <label for="radio2">&#9733;</label>
+       <input id="radio3" type="radio" name="estrellas" value="3">
+       <label for="radio3">&#9733;</label>
+       <input id="radio4" type="radio" name="estrellas" value="2">
+       <label for="radio4">&#9733;</label>
+       <input id="radio5" type="radio" name="estrellas" value="1">
+       <label for="radio5">&#9733;</label>
+    </p>
+    <textarea style="height: 200px" class="form-control" type="text" name="comment" placeholder="Comment"></textarea>
+    <p>
+      <input type="submit" value="submit" name="submitRating" />
+    </p>
+</div>
+<?php }else
 if ($result->downpayment==!null) {?>
          <h3>Balance : PHP &nbsp<?php 
             $balance = $result->total -  $result->downpayment;
