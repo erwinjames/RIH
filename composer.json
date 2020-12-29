@@ -1,5 +1,6 @@
 {
     "require": {
-        "paymaya/paymaya-sdk": "*"
+        "paymaya/paymaya-sdk": "*",
+        "phpmailer/phpmailer": "^6.2"
     }
 }
