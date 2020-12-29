@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3d8a8df1ca1b63a3ade6852145321707afc52494',
+    'reference' => 'a2c27856cd9198975ef81f1e5fd1e517ad8c52c6',
     'name' => '__root__',
   ),
   'versions' => 
@@ -41,7 +41,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3d8a8df1ca1b63a3ade6852145321707afc52494',
+      'reference' => 'a2c27856cd9198975ef81f1e5fd1e517ad8c52c6',
     ),
     'paymaya/paymaya-sdk' => 
     array (
