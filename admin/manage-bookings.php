@@ -56,7 +56,6 @@ $result = itexmo($number1,$message1,$apicode1,$passwd1);
 if ($result == ""){
 echo "iTexMo: No response from server!!! ";	
 }else if ($result == 0){
-header("location:includes/sendmail.php?email=$emails");
 }
 else{	
 echo "Error Num ". $result . " was encountered!";
@@ -168,13 +167,14 @@ echo "Error Num ". $result . " was encountered!";
 						  </tr>
 						</thead>
 						<tbody>
-<?php $sql = "SELECT tblbooking.BookingId as bookid,tblusers.Fname as fname,
-tblusers.MobileNumber as mnumber,tblusers.EmailId as email,
-tbltourpackages.PackageName as pckname,tblbooking.PackageId as pid,
-tblbooking.FromDate as fdate,tblbooking.status as status,
-tblbooking.CancelledBy as cancelby,tblbooking.UpdationDate as upddate
- from tblusers join  tblbooking on  tblbooking.UserEmail=tblusers.EmailId 
- join tbltourpackages on tbltourpackages.PackageId=tblbooking.PackageId";
+<?php
+ $sql = "SELECT tblbooking.BookingId as bookid,tblusers.Fname as fname,
+ tblusers.MobileNumber as mnumber,tblusers.EmailId as email,
+ tbltourpackages.PackageName as pckname,tblbooking.PackageId as pid,
+ tblbooking.FromDate as fdate,tblbooking.status as status,
+ tblbooking.CancelledBy as cancelby,tblbooking.UpdationDate as upddate,tblbooking.payment as paymentMethod,tblbooking.payment_status as PayStatus
+  from tblusers join  tblbooking on  tblbooking.UserEmail=tblusers.EmailId 
+  join tbltourpackages on tbltourpackages.PackageId=tblbooking.PackageId"; 
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
