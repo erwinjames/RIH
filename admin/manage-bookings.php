@@ -146,6 +146,7 @@ echo "Error Num ". $result . " was encountered!";
                 <li class="breadcrumb-item"><a href="index.html">Home</a><i class="fa fa-angle-right"></i>Manage Bookings</li>
             </ol>
 <div class="agile-grids">	
+
 				<!-- tables -->
 				<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
 				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
@@ -174,7 +175,7 @@ echo "Error Num ". $result . " was encountered!";
  tblbooking.FromDate as fdate,tblbooking.status as status,
  tblbooking.CancelledBy as cancelby,tblbooking.UpdationDate as upddate,tblbooking.payment as paymentMethod,tblbooking.payment_status as PayStatus
   from tblusers join  tblbooking on  tblbooking.UserEmail=tblusers.EmailId 
-  join tbltourpackages on tbltourpackages.PackageId=tblbooking.PackageId"; 
+  join tbltourpackages on tbltourpackages.PackageId=tblbooking.PackageId where tblbooking.status=0"; 
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

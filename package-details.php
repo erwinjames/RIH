@@ -39,7 +39,8 @@ else
 {
 $error="Something went wrong. Please try again";
 }
-}
+	}
+
 }
 
 if (isset($_POST['searchCity'])) {
@@ -81,26 +82,39 @@ if (isset($_POST['searchCity'])) {
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
 <script src="js/wow.min.js"></script>
-<link rel="stylesheet" href="css/jquery-ui.css" />
+<!-- <link rel="stylesheet" href="css/jquery-ui.css" /> -->
 	<script>
 		 new WOW().init();
 	</script>
+<link rel="stylesheet"  href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<!-- <script src="js/jquery-1.10.2.js"></script> -->
+<script src="js/jquery-ui1.js"></script>
+<script>
+   
+    // var badDates = new Array("23-01-2021","24-01-2021","19-01-2021","20-01-2021");
+	// $.getJSON('getDates.php, function(json){badDates=json;});
 
-<script src="js/jquery-ui.js"></script>
-					<script>
-						$(function() {
-					$('#datepicker').datepicker().change(evt => {
-  var selectedDate = $('#datepicker').datepicker('getDate');
-  var now = new Date();
-  now.setHours(0,0,0,0);
-  if (selectedDate < now) {
-    alert("You cant reserve boat on that date!")
-  } else {
-    console.log("proceed");
-  }
-       });
-						});
-					</script>
+    $(function() {
+		var badDates;
+		$.getJSON('getDates.php', function(json) { 
+			badDates = new Array(json);
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'dd-mm-yy',
+            beforeShowDay: function(date) {
+                if($.inArray($.datepicker.formatDate('dd-mm-yy', date ), badDates) > -1)
+                {
+                    return [false,"Unavailable","Reserve Date"];
+                }
+                else
+                {
+                    return [true,"Available","Not Reserve"];
+                }
+            }
+		});
+	});
+    })
+
+</script>
 				
 	  <style>
 		.errorWrap {

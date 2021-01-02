@@ -1,0 +1,52 @@
+
+// 						$(function() {
+// 					$('#datepicker').datepicker().change(evt => {
+//   var selectedDate = $('#datepicker').datepicker('getDate');
+//   var now = new Date();
+//   now.setHours(0,0,0,0);
+//   if (selectedDate < now) {
+//     alert("You cant reserve boat on that date!")
+//   } else {
+//     console.log("proceed");
+//   }
+//        });
+// 						});
+// var unavailableDates;
+// var $myBadDates = new Array("09 January 2021","21 January 2021","12 January 2021");
+
+// function checkAvailability(mydate){
+// var $return=true;
+// var $returnclass ="available";
+// $checkdate = $.datepicker.formatDate('dd MM yy', mydate);
+// for(var i = 0; i < $myBadDates.length; i++)
+// {
+// if($myBadDates[i] == $checkdate)
+// {
+// $return = false;
+// $returnclass= "unavailable";
+// }
+// }
+// return [$return,$returnclass];
+// }
+
+// $(document).ready(function()
+// {
+// 	var id = "<?php echo $_GET['pkgid']?>";
+//     $("#datepicker").datepicker({
+//         dateFormat: 'dd MM yy',
+//         minDate: 0,
+//         firstDay: 1, // rows starts on Monday
+//         changeMonth: true,
+//         changeYear: true,
+//         showOtherMonths: true,
+//         selectOtherMonths: true,
+// 		beforeShowDay: function(date) {
+//     dmy = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+//     if ($.inArray(dmy, unavailableDates) == -1) {
+//         return [true, ""];
+//     } else {
+//         return [false, "", "Unavailable"];
+//     }
+// }
+//         });
+// });
