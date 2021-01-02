@@ -97,7 +97,7 @@ if (isset($_POST['searchCity'])) {
     $(function() {
 		var badDates;
 		$.getJSON('getDates.php', function(json) { 
-			badDates = new Array(json);
+			badDates = json;
         $( "#datepicker" ).datepicker({
             dateFormat: 'dd-mm-yy',
             beforeShowDay: function(date) {

@@ -13,7 +13,7 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 {
     $checkDates[] = $result['FromDate'];
-    $arraydata = implode(',',$checkDates);
+    // $arraydata = implode(',',$checkDates);
     // echo $arraydata;
    
 }
@@ -23,6 +23,6 @@ foreach($results as $result)
 // }
 }
 header('Content-Type: application/json');
-echo json_encode($arraydata);
+echo json_encode($checkDates);
 ?>
 
