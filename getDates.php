@@ -1,6 +1,6 @@
 <?php 
 include("includes/config.php");
-$pid=14;
+$pid=$_GET['ids'];
 $sql = "SELECT * from tblbooking where PackageId=:pid";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':pid', $pid, PDO::PARAM_STR);
