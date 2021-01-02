@@ -82,11 +82,11 @@ if (isset($_POST['searchCity'])) {
 <!--animate-->
 <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
 <script src="js/wow.min.js"></script>
-<link rel="stylesheet" href="css/jquery-ui.css" />
+<!-- <link rel="stylesheet" href="css/jquery-ui.css" /> -->
 	<script>
 		 new WOW().init();
 	</script>
-<!-- <link rel="stylesheet"  href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> -->
+<link rel="stylesheet"  href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <!-- <script src="js/jquery-1.10.2.js"></script> -->
 <script src="js/jquery-ui1.js"></script>
 <script>
