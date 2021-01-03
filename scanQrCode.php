@@ -243,7 +243,12 @@ if ($result->downpayment==!null) {?>
         <a href="scanQrCode.php?emails=<?php echo $_GET['emails'];?>&&payid=<?php echo  $userId;?>&&downP=<?php echo $_GET['percent'];?>&&totals=<?php echo $_GET['totals'];?>" class="btn btn-success">Submit<a>
 
 
-<?php } } }else{ echo "<script>alert('Please wait until sends you the qr code');</script>";}?>
+<?php } } }else{ echo "
+<script>
+alert('wait for the qr code');
+location.href='tour-history.php';
+</script>";
+  }?>
 		</form>
         
      
