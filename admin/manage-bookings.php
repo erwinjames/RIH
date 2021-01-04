@@ -56,6 +56,7 @@ $result = itexmo($number1,$message1,$apicode1,$passwd1);
 if ($result == ""){
 echo "iTexMo: No response from server!!! ";	
 }else if ($result == 0){
+	header("location:includes/sendmail.php?email=$emails");
 }
 else{	
 echo "Error Num ". $result . " was encountered!";

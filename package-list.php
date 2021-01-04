@@ -38,7 +38,7 @@ include('includes/config.php');
 			<h3>Our Boats</h3>
 
 					
-<?php $sql = "SELECT * from tbltourpackages";
+<?php $sql = "SELECT * from tbltourpackages where status=1";
 $query = $dbh->prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -49,7 +49,7 @@ foreach($results as $result)
 {	?>
 			<div class="rom-btm">
 				<div class="col-md-3 room-left wow fadeInLeft animated" data-wow-delay=".5s">
-					<img src="admin/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
+					<img src="owners/pacakgeimages/<?php echo htmlentities($result->PackageImage);?>" class="img-responsive" alt="">
 				</div>
 				<div class="col-md-6 room-midle wow fadeInUp animated" data-wow-delay=".5s">
 					<h4>Package Name: <?php echo htmlentities($result->PackageName);?></h4>

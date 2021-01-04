@@ -22,8 +22,8 @@ $email= $_GET['email'];
   $mail->SetFrom("manugasewinjames@gmail.com", "erwin james");
   $mail->AddReplyTo("manugasewinjames@gmail.com", "EJMANUGAS");
   $mail->AddCC("manugasewinjames@gmail.com", "cc-recipient-name");
-  $mail->Subject = "Test is Test Email sent via Gmail SMTP Server using PHP Mailer";
-  $content = "<b>This is a Test Email sent via Gmail SMTP Server using PHP mailer class.</b>";
+  $mail->Subject = "Reservation Confirmation";
+  $content = "<b>This is Rameriz island Hopping confirming that your reserve boat was confirmed, please check your RIH account for mor info.</b>";
 
   $mail->MsgHTML($content); 
   if(!$mail->Send()) {
