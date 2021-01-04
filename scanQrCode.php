@@ -240,7 +240,7 @@ if ($result->downpayment==!null) {?>
 <?php } else {?>
         <h3>PAY : PHP &nbsp<?php echo $_GET['percent'];?></h3>
         <h3>TOTAL OF : PHP &nbsp<?php echo $_GET['totals'];?></h3>
-        <a href="scanQrCode.php?emails=<?php echo $_GET['emails'];?>&&payid=<?php echo  $userId;?>&&downP=<?php echo $_GET['percent'];?>&&totals=<?php echo $_GET['totals'];?>" class="btn btn-success">Submit<a>
+        <a href="scanQrCode.php?emails=<?php echo $_GET['emails'];?>&&payid=<?php echo  $bIds;?>&&downP=<?php echo $_GET['percent'];?>&&totals=<?php echo $_GET['totals'];?>" class="btn btn-success">Submit<a>
 
 
 <?php } } }
