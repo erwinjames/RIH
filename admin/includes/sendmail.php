@@ -15,14 +15,14 @@ $names = $_GET['names'];
   $mail->SMTPSecure = "tls";
   $mail->Port       = 587;
   $mail->Host       = "smtp.gmail.com";
-  $mail->Username   = "manugasewinjames@gmail.com";
-  $mail->Password   = "HardFact30";
+  $mail->Username   = "PLEASE USE YOUR PERSONAL EMAIL ACCOUNT"; //manugasewinjames@gmail.com
+  $mail->Password   = "YOUR PERSONAL EMAIL PASSWORD"; //Your password
 
   $mail->IsHTML(true);
   $mail->AddAddress($email, $names);
-  $mail->SetFrom("manugasewinjames@gmail.com", "RIH");
-  $mail->AddReplyTo("manugasewinjames@gmail.com", "RIH");
-  $mail->AddCC("manugasewinjames@gmail.com", "cc-recipient-name");
+  $mail->SetFrom("manugasewinjames@gmail.com", "RIH"); //change email
+  $mail->AddReplyTo("manugasewinjames@gmail.com", "RIH"); //change email
+  $mail->AddCC("manugasewinjames@gmail.com", "cc-recipient-name"); //change email
   $mail->Subject = "Reservation Confirmation";
   $content = "<b>This is Rameriz island Hopping confirming that your reserve boat was confirmed, please check your RIH account for mor info.</b>";
 
