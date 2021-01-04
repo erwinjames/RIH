@@ -36,6 +36,7 @@ $query-> bindParam(':bcid',$bcid, PDO::PARAM_STR);
 $query -> execute();
 if ($query) {
 	$emails = $_GET['emails'];
+	$names = $_GET['name'];
 	$number1 = $_GET['numbers'];
 $message1 = "This is Rameriz island Hopping conferming that your reservation is confirmed";
 $apicode1="TR-ERWIN419916_IKT4L";
@@ -56,7 +57,7 @@ $result = itexmo($number1,$message1,$apicode1,$passwd1);
 if ($result == ""){
 echo "iTexMo: No response from server!!! ";	
 }else if ($result == 0){
-	header("location:includes/sendmail.php?email=$emails");
+	header("location:includes/sendmail.php?email=$emails&&names=$names");
 }
 else{	
 echo "Error Num ". $result . " was encountered!";
@@ -218,7 +219,7 @@ echo "Canceled by User at " .$result->upddate;
 {
 	?><td>Cancelled</td>
 <?php } else {?>
-<td><a href="manage-bookings.php?bkid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you really want to cancel booking')" >Cancel</a> / <a href="manage-bookings.php?emails=<?php echo htmlentities($result->email);?>&&numbers=<?php echo htmlentities($result->mnumber);?>&&bckid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you want to confirm booking')" >Confirm</a></td>
+<td><a href="manage-bookings.php?bkid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you really want to cancel booking')" >Cancel</a> / <a href="manage-bookings.php?name=<?php echo htmlentities($result->fname);?>&&emails=<?php echo htmlentities($result->email);?>&&numbers=<?php echo htmlentities($result->mnumber);?>&&bckid=<?php echo htmlentities($result->bookid);?>" onclick="return confirm('Do you want to confirm booking')" >Confirm</a></td>
 <?php }?>
 
 						  </tr>

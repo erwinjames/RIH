@@ -1,5 +1,6 @@
 <?php
 $email= $_GET['email'];
+$names = $_GET['names'];
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
   require 'PHPMailer/src/Exception.php';
@@ -18,9 +19,9 @@ $email= $_GET['email'];
   $mail->Password   = "HardFact30";
 
   $mail->IsHTML(true);
-  $mail->AddAddress("manugasewinjames@gmail.com", "ejmanugas");
-  $mail->SetFrom("manugasewinjames@gmail.com", "erwin james");
-  $mail->AddReplyTo("manugasewinjames@gmail.com", "EJMANUGAS");
+  $mail->AddAddress($email, $names);
+  $mail->SetFrom("manugasewinjames@gmail.com", "RIH");
+  $mail->AddReplyTo("manugasewinjames@gmail.com", "RIH");
   $mail->AddCC("manugasewinjames@gmail.com", "cc-recipient-name");
   $mail->Subject = "Reservation Confirmation";
   $content = "<b>This is Rameriz island Hopping confirming that your reserve boat was confirmed, please check your RIH account for mor info.</b>";
