@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2020 at 06:09 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.0
+-- Generation Time: Jan 04, 2021 at 04:16 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -91,8 +92,9 @@ CREATE TABLE `tblbooking` (
 --
 
 INSERT INTO `tblbooking` (`BookingId`, `PackageId`, `UserEmail`, `FromDate`, `pkgOffer_value`, `pax`, `RegDate`, `status`, `CancelledBy`, `UpdationDate`, `payment`, `payment_status`) VALUES
-(33, 17, 'ejmanugas@dev.com', '2020-12-30', '', 6500, '2020-12-27 19:04:57', 0, NULL, '2020-12-27 20:41:26', 'gcash', 'check'),
-(34, 18, 'ejmanugas@dev.com', '2020-12-28', '', 6500, '2020-12-27 21:52:33', 0, NULL, '2020-12-27 21:58:13', 'gcash', 'check');
+(61, 14, 'manugasewinjames@gmail.com', '14-01-2021', '1200', 5600, '2021-01-02 16:02:37', 1, NULL, '2021-01-04 15:08:37', 'gcash', 'check'),
+(70, 15, 'manugasewinjames@gmail.com', '19-01-2021', '1200', 6500, '2021-01-02 17:01:36', 0, NULL, '2021-01-04 15:06:55', 'gcash', NULL),
+(71, 14, 'manugasewinjames@gmail.com', '16-01-2021', '1200', 5600, '2021-01-03 03:07:08', 0, NULL, '2021-01-04 15:06:58', 'gcash', NULL);
 
 -- --------------------------------------------------------
 
@@ -202,7 +204,7 @@ CREATE TABLE `tblpayments` (
 --
 
 INSERT INTO `tblpayments` (`payId`, `bookingId`, `receivedBy`, `DownPay_amount`, `statusRecived`, `Full_Amount`, `date`) VALUES
-(5, 33, 'ejmanugas@dev.com', 1000, 5500, 6500, '2020-12-27');
+(11, 61, 'manugasewinjames@gmail.com', 3400, 3400, 6800, '2021-01-04');
 
 -- --------------------------------------------------------
 
@@ -224,15 +226,15 @@ CREATE TABLE `tblqrmessage` (
 --
 
 INSERT INTO `tblqrmessage` (`id`, `bookings_id`, `owner_email`, `users_email`, `qr`, `sending_date`) VALUES
-(1, NULL, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', 'DONG.png', '2020-12-19 00:47:16'),
-(2, NULL, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '56219956_2147429515346310_5177691712230785024_o.jpg', '2020-12-19 00:50:01'),
 (3, 23, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', 'DONG.png', '2020-12-19 03:26:00'),
 (4, 27, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '56219956_2147429515346310_5177691712230785024_o.jpg', '2020-12-19 08:00:18'),
 (5, 31, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '0000000001=.jpg', '2020-12-27 18:11:43'),
 (6, 31, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '01.jpg', '2020-12-27 19:02:31'),
 (7, 33, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '0001.png', '2020-12-27 19:05:36'),
 (8, 31, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', 'background3.jpg', '2020-12-27 19:06:01'),
-(9, 34, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '000001.jpg', '2020-12-27 21:57:17');
+(9, 34, 'manugasewinjames@dev.com', 'ejmanugas@dev.com', '000001.jpg', '2020-12-27 21:57:17'),
+(11, 71, 'manugasewinjames@dev.com', 'manugasewinjames@gmail.com', 'WIN_20210103_11_39_06_Pro.jpg', '2021-01-04 12:56:22'),
+(12, 61, 'manugasewinjames@dev.com', 'manugasewinjames@gmail.com', 'WIN_20210103_11_39_06_Pro.jpg', '2021-01-04 13:18:42');
 
 -- --------------------------------------------------------
 
@@ -245,7 +247,7 @@ CREATE TABLE `tbltourpackages` (
   `owner_identity` varchar(200) DEFAULT NULL,
   `PackageName` varchar(200) DEFAULT NULL,
   `address` text DEFAULT NULL,
-  `contact_num` int(13) DEFAULT NULL,
+  `contact_num` varchar(200) DEFAULT NULL,
   `boat_name` varchar(150) DEFAULT NULL,
   `boat_operator` varchar(100) DEFAULT NULL,
   `boat_capacity` int(100) DEFAULT NULL,
@@ -265,11 +267,11 @@ CREATE TABLE `tbltourpackages` (
 --
 
 INSERT INTO `tbltourpackages` (`PackageId`, `owner_identity`, `PackageName`, `address`, `contact_num`, `boat_name`, `boat_operator`, `boat_capacity`, `pricePerpack`, `PackageLocation`, `PackageFetures`, `offer_price`, `PackageDetails`, `PackageImage`, `Creationdate`, `UpdationDate`, `status`) VALUES
-(14, 'manugasewinjames@dev.com', 'Olango Princess Hopping2', 'babag 2 lapu lapu city cebu', 65464646, 'princess star2', 'erwin2', 14, 800, 'Olango', 'With foods', 1200, 'This is a test for the identity', '1102017.png', '2020-12-17 08:18:25', '2020-12-27 18:01:15', 1),
-(15, 'manugasewin@dev.com', 'Olango Princess Hopping', 'babag 2 lapu lapu city cebu', 65464646, 'princess star2', 'erwin', 11, 100, 'Olango-lapu2', 'porkchup, lechon', 1000, 'fadsfadf', '4x3.jpg', '2020-12-18 17:42:43', '2020-12-27 19:04:20', 1),
-(16, 'admin', 'sample', 'babag', 14654654, 'star', 'me', 15, 450, 'olango', 'baboy', 5000, 'something details', '00000000001.png', '2020-12-27 17:19:35', '2020-12-27 17:48:51', 1),
-(17, 'admin', 'sample', 'babag', 14654654, 'star', 'me', 15, 550, 'olango', 'baboy manok', 5000, 'fadfadfsa', '01.jpg', '2020-12-27 19:04:10', '2020-12-27 19:04:19', 1),
-(18, 'manugasewinjames@dev.com', 'this is a sample', 'babag', 14654654, 'star', 'me', 15, 550, 'olango', 'baboy', 5000, 'sample', '000000000000001.jpg', '2020-12-27 21:51:25', '2020-12-27 21:55:42', 1);
+(14, 'manugasewinjames@dev.com', 'Olango Princess Hopping2', 'babag 2 lapu lapu city cebu', '09062419916', 'princess star2', 'erwin2', 14, 800, 'Olango', 'With foods', 1200, 'This is a test for the identity', '1102017.png', '2020-12-17 08:18:25', '2020-12-30 02:12:36', 1),
+(15, 'manugasewin@dev.com', 'Olango Princess Hopping', 'babag 2 lapu lapu city cebu', '09062419916', 'princess star2', 'erwin', 11, 100, 'Olango-lapu2', 'porkchup, lechon', 1000, 'fadsfadf', '4x3.jpg', '2020-12-18 17:42:43', '2020-12-30 02:13:02', 1),
+(16, 'admin', 'sample', 'babag', '14654654', 'star', 'me', 15, 450, 'olango', 'baboy', 5000, 'something details', '00000000001.png', '2020-12-27 17:19:35', '2020-12-27 17:48:51', 1),
+(17, 'admin', 'sample', 'babag', '14654654', 'star', 'me', 15, 550, 'olango', 'baboy manok', 5000, 'fadfadfsa', '01.jpg', '2020-12-27 19:04:10', '2020-12-27 19:04:19', 1),
+(18, 'manugasewinjames@dev.com', 'this is a sample', 'babag', '14654654', 'star', 'me', 15, 550, 'olango', 'baboy', 5000, 'sample', '000000000000001.jpg', '2020-12-27 21:51:25', '2020-12-27 21:55:42', 1);
 
 -- --------------------------------------------------------
 
@@ -282,7 +284,7 @@ CREATE TABLE `tblusers` (
   `Fname` varchar(100) DEFAULT NULL,
   `Mname` varchar(100) NOT NULL,
   `Lname` varchar(100) NOT NULL,
-  `MobileNumber` char(10) DEFAULT NULL,
+  `MobileNumber` char(15) DEFAULT NULL,
   `EmailId` varchar(70) DEFAULT NULL,
   `Gnder` varchar(2) NOT NULL,
   `Password` varchar(100) DEFAULT NULL,
@@ -295,7 +297,7 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`id`, `Fname`, `Mname`, `Lname`, `MobileNumber`, `EmailId`, `Gnder`, `Password`, `RegDate`, `UpdationDate`) VALUES
-(13, 'erwin', 'Bongansiso', 'Manugas', '4684654654', 'ejmanugas@dev.com', 'M', '2faeca726344e2abbe4824c36d94513b', '2020-12-04 01:02:10', NULL);
+(13, 'erwin', 'Bongansiso', 'Manugas', '09062419916', 'manugasewinjames@gmail.com', 'M', '2faeca726344e2abbe4824c36d94513b', '2020-12-04 01:02:10', '2020-12-30 02:55:30');
 
 --
 -- Indexes for dumped tables
@@ -389,7 +391,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `tblbooking`
 --
 ALTER TABLE `tblbooking`
-  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `BookingId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `tblenquiry`
@@ -419,13 +421,13 @@ ALTER TABLE `tblpages`
 -- AUTO_INCREMENT for table `tblpayments`
 --
 ALTER TABLE `tblpayments`
-  MODIFY `payId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `payId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tblqrmessage`
 --
 ALTER TABLE `tblqrmessage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbltourpackages`
