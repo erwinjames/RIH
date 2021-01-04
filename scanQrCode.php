@@ -183,11 +183,11 @@ input[type="radio"]:checked ~ label {
 		<h3 class="wow fadeInDown animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name:fadeInDown;">Scan Gcash Qr Code</h3>
 		<form name="chngpwd" method="post" onSubmit="return valid();">     
                 <?php 
-$bIds=$_GET['bId'];
+$bIds=intval($_GET['bId']);
 $sql = "SELECT tblpayments.bookingId as bookid,tblpayments.receivedBy 
 as rby,tblpayments.DownPay_amount as downpayment,tblpayments.Full_Amount 
 as total,tblpayments.statusRecived as status,tblpayments.date as dates,tblqrmessage.users_email 
-as useremail,tblqrmessage.qr as qrcode from tblpayments join tblqrmessage on tblqrmessage.bookings_id=tblpayments.bookingId Where bookingId = :bIds ";
+as useremail,tblqrmessage.bookings_id as messageId,tblqrmessage.qr as qrcode from tblpayments right join tblqrmessage on tblqrmessage.bookings_id=tblpayments.bookingId Where tblqrmessage.bookings_id = :bIds";
 
 $query = $dbh->prepare($sql);
 $query -> bindParam(':bIds', $bIds, PDO::PARAM_STR);
@@ -243,12 +243,14 @@ if ($result->downpayment==!null) {?>
         <a href="scanQrCode.php?emails=<?php echo $_GET['emails'];?>&&payid=<?php echo  $userId;?>&&downP=<?php echo $_GET['percent'];?>&&totals=<?php echo $_GET['totals'];?>" class="btn btn-success">Submit<a>
 
 
-<?php } } }else{ echo "
+<?php } } }
+else{ echo "
 <script>
 alert('wait for the qr code');
 location.href='tour-history.php';
 </script>";
-  }?>
+ }
+  ?>
 		</form>
         
      

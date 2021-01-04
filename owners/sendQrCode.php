@@ -12,7 +12,7 @@ else{
 if(isset($_POST['submit']))
 {
 $bookId = $_GET['id'];
-$owners_identity=htmlentities($_SESSION['alogin']);
+$owners_identity=htmlentities($_SESSION['alogin1']);
 $user_email=$_GET['email'];	
 $qrcode=$_FILES["qrCode"]["name"];
 move_uploaded_file($_FILES["qrCode"]["tmp_name"],"pacakgeimages/".$_FILES["qrCode"]["name"]);
