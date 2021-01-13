@@ -336,6 +336,31 @@ foreach($results as $result)
 		</div> -->
 		</form>
 <?php }} ?>
+<?php 
+$pid=intval($_GET['pkgid']);
+$sql = "SELECT ratings.rating_id as idRating,ratings.booking_id as BookingId,ratings.rating as rating,ratings.ratingsFrom as ratingFrom,ratings.comment as Comment,ratings.date as dates,tblbooking.BookingId as tblbookId,tblbooking.PackageId as tblpkgId from ratings left join tblbooking on tblbooking.BookingId=ratings.booking_id where tblbooking.PackageId = $pid";
+$query = $dbh->prepare($sql);
+$query->execute();
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+$cnt=1;
+if($query->rowCount() > 0)
+{
+foreach($results as $result)
+{	?>
+			<div class="rom-btm">
+			
+				<div class="col-md-6 room-midle wow fadeInUp animated" data-wow-delay=".5s">
+					<h4><?php echo htmlentities($result->rating);?> STAR</h4>
+					<h6><?php echo htmlentities($result->ratingFrom);?></h6>
+					<center><p style="text-align:center;"><?php echo htmlentities($result->Comment);?></p></center>
+					<p style="font-size:10px"><?php echo htmlentities($result->dates);?></p>
+				</div>
+				
+				<div class="clearfix"></div>
+			</div>
+
+<?php }} ?>
+		
 	</div>
 </div>
 <!-- <script src="js/jquery.min.js"></script> -->
