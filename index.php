@@ -27,6 +27,7 @@ include('includes/config.php');
 </head>
 <body>
 <?php include('includes/header.php');?>
+<?php include('includes/chatBubble.php'); ?>
 <div class="banner">
 	<div class="container">
 		<h1 class="wow zoomIn animated animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: zoomIn;">RAMIREZ ISLAND HOPPING</h1>
@@ -158,6 +159,6 @@ $cnt1=$query1->rowCount();
 <?php include('includes/signup.php');?>			
 <?php include('includes/signin.php');?>			
 <?php include('includes/write-us.php');?>			
-
+<script src="js/bubble.js"></script>
 </body>
 </html>

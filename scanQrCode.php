@@ -187,7 +187,7 @@ $bIds=intval($_GET['bId']);
 $sql = "SELECT tblpayments.bookingId as bookid,tblpayments.receivedBy 
 as rby,tblpayments.DownPay_amount as downpayment,tblpayments.Full_Amount 
 as total,tblpayments.statusRecived as status,tblpayments.date as dates,tblqrmessage.users_email 
-as useremail,tblqrmessage.bookings_id as messageId,tblqrmessage.qr as qrcode from tblpayments right join tblqrmessage on tblqrmessage.bookings_id=tblpayments.bookingId Where tblqrmessage.bookings_id = :bIds";
+as useremail,tblqrmessage.bookings_id as messageId,tblqrmessage.qr as qrcode from tblpayments right join tblqrmessage on tblqrmessage.bookings_id=tblpayments.bookingId Where tblqrmessage.bookings_id = :bIds LIMIT 1";
 
 $query = $dbh->prepare($sql);
 $query -> bindParam(':bIds', $bIds, PDO::PARAM_STR);
