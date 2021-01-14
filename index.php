@@ -159,6 +159,6 @@ $cnt1=$query1->rowCount();
 <?php include('includes/signup.php');?>			
 <?php include('includes/signin.php');?>			
 <?php include('includes/write-us.php');?>			
-<script src="js/bubble.js"></script>
+<script src="js/bubble.js"></script> 
 </body>
 </html>

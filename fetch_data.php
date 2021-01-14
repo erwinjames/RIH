@@ -21,10 +21,12 @@ $result = $statement->fetchAll();
 foreach($result as $row)
 {
  $output .= '
- <span class="chat_msg_item chat_msg_item_user"></span>
+ <span class="chat_msg_item chat_msg_item_user">
+ Hello!</span>
  ';
 }
 
+$output .= '</table>';
 
 echo $output;
 
