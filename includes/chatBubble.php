@@ -24,10 +24,8 @@
                <img src="https://www.shareicon.net/data/2016/09/01/822711_user_512x512.png"/>
             </div>Hey there! Any question?</span>
             <div class="status">20m ago</div>
-            
       <span class="chat_msg_item chat_msg_item_user">Hello!</span>
       <div class="status">20m ago</div> 
-   
     </div>
     <div id="chat_form" class="chat_converse chat_form">
     <a id="chat_fourth_screen" class="fab"><i class="zmdi zmdi-arrow-right"></i></a>
@@ -41,9 +39,14 @@
       <div class="status">20m ago</div> 
     </div>
     <div class="fab_field">
-      <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
-      <a id="fab_send" class="fab"><i class="zmdi zmdi-mail-send"></i></a>
-      <textarea id="chatSend" name="chat_message" placeholder="Send a message" class="chat_field chat_message"></textarea>
+    <form method="post" id="msenger" action="">
+     
+      <textarea name="msg" id="msg-min" placeholder="Send a message" class="chat_field chat_message"></textarea>
+      <input type="hidden" name="mid" value="blabla">
+      <input type="hidden" name="fid" value="blabla">
+       <a id="fab_camera" class="fab"><i class="zmdi zmdi-camera"></i></a>
+      <a id="sb-mt" class="fab"><i class="zmdi zmdi-mail-send"></i></a>
+      </form>
     </div>
   </div>
     <a id="prime" class="fab"><i class="prime zmdi zmdi-comment-outline"></i></a>
